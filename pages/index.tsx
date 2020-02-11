@@ -1,14 +1,15 @@
-import { Button, Alert } from "reactstrap";
-import Layout from "../components/Layout";
-export default () => {
-    return (
-        <Layout>
-            <div>
-                <Alert color="primary">
-                    Hello Project is strapi-next with Bootstrap
-                </Alert>
-                &nbsp; <Button color="primary">Hello from nextjs</Button>
-            </div>
-        </Layout>
-    );
-};
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+
+class ExamplePage extends Component<any, any> {
+    static async getInitialProps({store}: any) {
+        store.dispatch({type: 'SOME_ASYNC_ACTION_REQUEST'})
+        return { staticData: 'Hello world!' }
+    }
+
+    render() {
+        return <div>{this.props.staticData}</div>
+    }
+}
+
+export default connect(state => state)(ExamplePage)
